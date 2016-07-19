@@ -1,28 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace HammingDistance
 {
-    public partial class Form1 : Form
+    public partial class Form2 : MetroForm
     {
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
         }
-
         private DataTable dt = new DataTable();
+        private void Form2_Load(object sender, EventArgs e)
+        {
 
-        /*  
-         *  hamming distance hesaplama         
-         */
+        }
 
-        private void btnHesapa_Click(object sender, EventArgs e)
+   
+
+        private void btnHesapla_Click(object sender, EventArgs e)
         {
             var counter = 0;
             var uzunluk = 0;
-            dataGridView1.Rows.Clear();
-            if (txtString1.TextLength != txtString2.TextLength)
+            metroGrid1.Rows.Clear();
+            if (txtString1.Text.Length != txtString2.Text.Length)
             {
                 MessageBox.Show(@"Girilen Metinler eşit uzunlukta değil");
                 return;
@@ -40,19 +48,20 @@ namespace HammingDistance
                 }
                 else
                 {
-                    dataGridView1.Rows.Add(i, metin1[i], metin2[i]);
+                    metroGrid1.Rows.Add(i, metin1[i], metin2[i]);
                 }
             }
 
-            lblSonuc.Text = @"Hamming Distance : " + (uzunluk - counter).ToString();
+            lblSonuc.Text = @"Hamming Distance : " + (uzunluk - counter);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void metroGrid1_SelectionChanged(object sender, EventArgs e)
         {
-
+            this.metroGrid1.ClearSelection();
         }
 
 
+        //alternatif yöntem
         //public static int GetHammingDistance(string source, string target)
         //{
         //    if (source.Length != target.Length)
